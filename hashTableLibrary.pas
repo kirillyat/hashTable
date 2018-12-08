@@ -51,20 +51,15 @@ implementation
 
 
 	{Инициализация ХЭШ-Таблицы}
-
-
 procedure htInit(var ht: hashTable);
 	var
-		
-  i: integer;
+		i: integer;
 	begin
 		for i := 0 to n - 1 do
 			ht[i] := nil
 	end;
 
 	{Локальная процедура для очистки памяти (не идет в интерфейс)}
-
-
 procedure Free(L: link);
 	begin
 		if L <> nil then begin
@@ -76,14 +71,11 @@ procedure Free(L: link);
 	
 	
 	{Очистка таблицы и Освобождение памяти}
-
-
 procedure htFree(var ht: hashTable);
 	var
 		i: integer;
 	begin
-		for i := 0 to n - 1 do 
-  begin
+		for i := 0 to n - 1 do begin
 			Free(ht[i]);
 		end; 
 		htInit(ht);
@@ -91,8 +83,6 @@ procedure htFree(var ht: hashTable);
 	
 
 	{Добавление одного элемента}	
-
-
 procedure htAdd(var ht: hashTable; A: valueType);
 	var
 	l, J: link;
@@ -131,25 +121,20 @@ procedure htAdd(var ht: hashTable; A: valueType);
 		end;
 	end;
 	
-	
-	
-	
+
 	{Заполнение таблицы (несколько элементов)}
-
-
 procedure htFill(var ht: hashTable);
 	var
-  A: valueType;
+ 		A: valueType;
 	begin
-		while not eoln do 
-  begin
+		while not eoln do begin
 			read(A);
 			htAdd(ht, A);
 		end;
 	end;
 	
 	
-		{Локальная процедура для вывода (не идет в интерфейс)}
+	{Локальная процедура для вывода (не идет в интерфейс)}
 procedure outputLine(L: link);
 	begin
 		if L <> nil then begin
@@ -173,22 +158,15 @@ procedure htOutput(var ht: hashTable);
 	end;	
 	
 	
-
-	
-
 	{Находится ли A в таблице?}	
-
-
 function inHashTable(var ht: hashTable; A: valueType): boolean;
 	var
-		
-  l: link;
+		l: link;
 		f: boolean;
 	begin
 		l := ht[a mod n];
 		f := False;
-		while l <> nil do 
-  begin
+		while l <> nil do begin
 			if l^.value = A then begin
 				f := True;
 				break;
@@ -199,27 +177,22 @@ function inHashTable(var ht: hashTable; A: valueType): boolean;
 	end;
 	
 	{Дать ссылку на A}
-
-
 function findElement(var ht: hashTable; A: valueType): link;
 	var
-		
-  l, result: link;
+		 l, result: link;
 	begin
 		l := ht[a mod n];
 		result := nil;
-		while l <> nil do 
-  begin
+		while l <> nil do begin
 			if l^.value = A then begin
 				result := l;
 				break;
 			end
 			else if l^.value > A then break
-			
 		end;
 		findElement := result;		
-		
 	end;
+	
 	
 	{Удаляет элемент А из ХТ}
 procedure htDelOne(var ht: hashtable; A: ValueType);
@@ -258,11 +231,7 @@ function htPower(var HT: hashtable): integer;{Показывает количе�
 			end;
 		end;
 		htPower := count;
-end;
-
-
-
-
+	end;
 
 
 
