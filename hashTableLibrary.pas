@@ -154,8 +154,11 @@ procedure outputLine(L: link);
 
 	{Вывод всех элементов}	
 procedure htOutput(var ht: hashTable);
-	var i : integer;
+	var 
+		i : integer;
 	begin
+		writeln;
+		writeln('#########################');
 		writeln('Output of Hash Table');
 		writeln('Size of Hash Table is :   ', n);
 		for i:=0 to n-1 do begin
@@ -163,7 +166,10 @@ procedure htOutput(var ht: hashTable);
 			outputLine(ht[i]);
 			writeln;
 		end; 
+		writeln('#########################');
+		writeln;
 	end;	
+	
 	
 	
 	{Находится ли A в таблице?}	
