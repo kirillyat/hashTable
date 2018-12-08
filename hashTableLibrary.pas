@@ -1,13 +1,9 @@
 unit hashTableLibrary;
 
-
 interface
 
-	
-
 const
-		{Размер ХЭШ-таблицы} {МОЖНО МЕНЯТЬ}
-		
+  {Размер ХЭШ-таблицы} {МОЖНО МЕНЯТЬ}
   n = 5;
 	
 	
@@ -44,6 +40,8 @@ type
 		procedure htFree(var ht: hashTable);
 		{Сколько элементов в хэш таблице?}
 		function htPower(var ht: hashTable): integer;
+		{Вывод всех элементов}
+		procedure htOutput(var ht: hashTable);
 		
 		
 		
@@ -82,8 +80,7 @@ procedure Free(L: link);
 
 procedure htFree(var ht: hashTable);
 	var
-		
-  i: integer;
+		i: integer;
 	begin
 		for i := 0 to n - 1 do 
   begin
@@ -98,25 +95,25 @@ procedure htFree(var ht: hashTable);
 
 procedure htAdd(var ht: hashTable; A: valueType);
 	var
-		
-  l, J: link;
+	l, J: link;
+	t:integer;
 		
 	begin
-		l := ht[a mod n];
-		if l = nil then begin
-				new(l);
-				l^.value := A;
-				l^.next := nil;
+		t := a mod n;
+		l := ht[A mod n];
+		if ht[t] = nil then begin
+				new(ht[t]);
+				ht[t]^.value := A;
+				ht[t]^.next := nil;
+				
 		end
 		
 		else begin
-		
-			while true do 
-    begin
-				if l = nil then begin
-					new(l);
-					l^.value := A;
-					l^.next := nil;
+			while true do begin
+				if  l^.next = nil then begin
+					new(l^.next);
+					l^.next^.value := A;
+					l^.next^.next := nil;
 					break;
 				end
 				else begin
@@ -126,12 +123,15 @@ procedure htAdd(var ht: hashTable; A: valueType);
 						J^.next := l^.next;
 						l^.value := A;
 						l^.next := J;
+						break;
 					end
 					else l := l^.next;
 				end;
 			end;	
 		end;
 	end;
+	
+	
 	
 	
 	{Заполнение таблицы (несколько элементов)}
@@ -147,6 +147,33 @@ procedure htFill(var ht: hashTable);
 			htAdd(ht, A);
 		end;
 	end;
+	
+	
+		{Локальная процедура для вывода (не идет в интерфейс)}
+procedure outputLine(L: link);
+	begin
+		if L <> nil then begin
+			write(' ', L^.value);
+			outputLine(L^.next);
+		end;
+	end;
+	
+
+	{Вывод всех элементов}	
+procedure htOutput(var ht: hashTable);
+	var i : integer;
+	begin
+		writeln('Output of Hash Table');
+		writeln('Size of Hash Table is :   ', n);
+		for i:=0 to n-1 do begin
+			write('[', i, ']');
+			outputLine(ht[i]);
+			writeln;
+		end; 
+	end;	
+	
+	
+
 	
 
 	{Находится ли A в таблице?}	
@@ -242,4 +269,5 @@ end;
 
 
 end.
+
 
