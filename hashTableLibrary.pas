@@ -3,17 +3,19 @@ unit hashTableLibrary;
 interface
 
 const
-  {Размер ХЭШ-таблицы} {МОЖНО МЕНЯТЬ}
-  n = 5;
+	{Размер ХЭШ-таблицы} {МОЖНО МЕНЯТЬ}
+	n = 5;
 	
 	
 
 type
-			{Указатель на элемент таблицы}
+		{Указатель на элемент таблицы}
 		link = ^htElem;
-			{Тип элементов} {МОЖНО МЕНЯТЬ}
+		
+		{Тип элементов} {МОЖНО МЕНЯТЬ}
 		valueType = integer;
-			{элементы ХЭШ-таблицы}
+		
+		{элементы ХЭШ-таблицы}
 		htElem = record 
 			value: valueType;
 			next: link;
@@ -26,20 +28,28 @@ type
 		
 		{Инициализация ХЭШ-Таблицы}
 		procedure htInit(var ht: hashTable);
+		
 		{Добавление одного элемента}						
 		procedure htAdd(var ht: hashTable; A: valueType);
+		
 		{Заполнение таблицы (несколько элементов)}
 		procedure htFill(var ht: hashTable);
+		
 		{Удаляет элемент А}
-		procedure htDelOne(var ht: hashTable; A: valueType);{Удаляет элемент А}
+		procedure htDelOne(var ht: hashTable; A: valueType);
+		
 		{Находится ли A в таблице?}
 		function inHashTable(var ht: hashTable; A: valueType): boolean;
+		
 		{Дать ссылку на A}
 		function findElement(var ht: hashTable; A: valueType): link;
+		
 		{Очистка таблицы и Освобождение памяти}
 		procedure htFree(var ht: hashTable);
+		
 		{Сколько элементов в хэш таблице?}
 		function htPower(var ht: hashTable): integer;
+		
 		{Вывод всех элементов}
 		procedure htOutput(var ht: hashTable);
 		
@@ -214,8 +224,8 @@ procedure htDelOne(var ht: hashtable; A: ValueType);
 	end;
 
 
-
-function htPower(var HT: hashtable): integer;{Показывает количество элементов в Хэш-таблице}
+	{Показывает количество элементов в Хэш-таблице}
+function htPower(var HT: hashtable): integer;
 	var
 		L: Link;
 		count, k: integer;
