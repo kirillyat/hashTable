@@ -170,17 +170,19 @@ procedure htOutput(var ht: hashTable);
 	{Находится ли A в таблице?}	
 function htInHashTable(var ht: hashTable; A: valueType): boolean;
 	var
-		l: link;
+		L: link;
 		f: boolean;
 	begin
-		l := ht[a mod n];
+		L := ht[a mod n];
 		f := False;
-		while l <> nil do begin
-			if l^.value = A then begin
+		while L <> nil do begin
+			if L^.value = A then begin
 				f := True;
 				break;
 			end
-			else if l^.value > A then break
+			else if L^.value > A then 
+				break;
+			L := L^.next;
 		end;
 		htInHashTable := f;
 	end;
