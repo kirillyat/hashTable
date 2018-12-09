@@ -22,32 +22,32 @@ type
 		{ХЭШ-таблица}
 		hashTable = array[0..n - 1] of link;
 		
-   {Инициализация ХЭШ-Таблицы}
-   procedure htInit(var ht: hashTable);
+           {Инициализация ХЭШ-Таблицы}
+           procedure htInit(var ht: hashTable);
 
-   {Добавление одного элемента}
-   procedure htAdd(var ht: hashTable; A: valueType);
+           {Добавление одного элемента}
+           procedure htAdd(var ht: hashTable; A: valueType);
 
-   {Заполнение таблицы (несколько элементов)}
-   procedure htFill(var ht: hashTable);
+           {Заполнение таблицы (несколько элементов)}
+           procedure htFill(var ht: hashTable);
 
-   {Удаляет элемент А}
-   procedure htDelOne(var ht: hashTable; A: valueType);
+           {Удаляет элемент А}
+           procedure htDelOne(var ht: hashTable; A: valueType);
 
-   {Находится ли A в таблице?}
-   function htInHashTable(var ht: hashTable; A: valueType): boolean;
+           {Находится ли A в таблице?}
+           function htInHashTable(var ht: hashTable; A: valueType): boolean;
 
-   {Дать ссылку на A}
-   function htFindElement(var ht: hashTable; A: valueType): link;
+           {Дать ссылку на A}
+           function htFindElement(var ht: hashTable; A: valueType): link;
 
-   {Очистка таблицы и Освобождение памяти}
-   procedure htFree(var ht: hashTable);
+           {Очистка таблицы и Освобождение памяти}
+           procedure htFree(var ht: hashTable);
 
-   {Сколько элементов в хэш таблице?}
-   function htPower(var ht: hashTable): integer;
+           {Сколько элементов в хэш таблице?}
+           function htPower(var ht: hashTable): integer;
 
-   {Вывод всех элементов}
-   procedure htOutput(var ht: hashTable);
+           {Вывод всех элементов}
+           procedure htOutput(var ht: hashTable);
 
 
 
@@ -61,6 +61,7 @@ procedure htInit(var ht : hashTable);
 		for i := 0 to n - 1 do
 			ht[i] := nil
 	end;
+	
 
 	{Локальная процедура для очистки памяти (не идет в интерфейс)}
 procedure Free(L : link);
@@ -70,7 +71,6 @@ procedure Free(L : link);
 			dispose(L);
 		end;
 	end;
-	
 	
 	
 	{Очистка таблицы и Освобождение памяти}
@@ -85,45 +85,44 @@ procedure htFree(var ht: hashTable);
 	end;
 	
 
-	{Добавление одного элемента}	
-procedure htAdd(var ht: hashTable; A: valueType);
-	var
-		l, J : link;
-		t : integer;
-		
-	begin
-		t := a mod n;
-		l := ht[t];
-		if ht[t] = nil then begin
-				new(ht[t]);
-				ht[t]^.value := A;
-				ht[t]^.next := nil;
-				
-		end
-		
-		else begin
-			while true do begin
-				if  l^.next = nil then begin
-					new(l^.next);
-					l^.next^.value := A;
-					l^.next^.next := nil;
-					break;
-				end
-				else begin
-					if l^.next^.value > A then begin
-						new(J);
-						J^.value := A;
-						J^.next := l^.next;
-						l^.next := J;
-						break;
-					end
-					else l := l^.next;
-				end;
-			end;	
-		end;
+	{Добавление одного элемента} 
+procedure htAdd(var ht: hashTable; A: valueType); 
+	var 
+		l, j, p : link; 
+		t : integer; 
+	begin 
+		t := A mod n; 
+		l := ht[t]; 
+		p := l; 
+		if l = nil then begin 
+			new(ht[t]); 
+			ht[t]^.value := A; 
+			ht[t]^.next := nil; 
+		end 
+		else if l^.value > A then begin 
+			new(j); 
+			j^.value := A; 
+			j^.next := l; 
+			ht[t] := j; 
+		end 
+		else begin 
+			while (l^.next <> nil) and (l^.value < A) do
+				l := l^.next; 
+			if (l^.next = nil) and (l^.value < A) then begin 
+				new(l^.next); 
+				l^.next^.value := A; 
+				l^.next^.next := nil 
+			end 
+			else begin 
+				while p^.next^.value < A do 
+					p := p^.next; 
+				new(j); 
+				j^.value := A; 
+				j^.next := l; 
+				p^.next := j; 
+			end 
+		end; 
 	end;
-	
-	
 
 	{Заполнение таблицы (несколько элементов)}
 procedure htFill(var ht: hashTable);
@@ -208,44 +207,31 @@ function htFindElement(var ht: hashTable; A: valueType): link;
 	end;
 	
 	
+	
 	{Удаляет элемент А из ХТ}
-procedure htDelOne(var ht: hashtable; A: ValueType);
-   var p,t: Link; k: integer;
-   begin
-	k:= A mod n; {ТУТ ДОЛЖНА БЫТЬ ФУНКЦИЯ!!! h1(a)}
-	p:=ht[k]; t:=p;
-	if p<>nil then
-	   begin
-		if (t^.next=nil) and (t^.value=A) then
-		   begin
-			ht[k]:=nil; dispose(t); t:=nil; p:=nil;
-		   end
-		else if (t^.next<>nil) and (t^.value=A) then
-		   begin
-			ht[k]:=ht[k]^.next; dispose(t); t:=nil; p:=nil;
-		   end
-		else if t^.next<>nil then
-		   begin
-			t:=t^.next;
-			while t<>nil do
-			   begin
-				if (t^.value = A) then
-				   if t^.next<>nil then
-					begin
-					   p^.next:=t^.next; dispose(t); t:=nil;
-					end
-				   else
-					begin
-					   p^.next:=nil; dispose(t); t:=nil;
-					end
-				else
-				   begin
-					p:=p^.next; t:=t^.next;
-				   end;
-			   end;
-		   end;
-	   end;
-   end;
+   
+procedure htDelOne(var ht: hashtable; A: ValueType); 
+	var 
+		l, j : link;
+		t : integer;
+	begin
+		t := A mod n;
+		l := ht[t];
+		if ht[t]^.value = A then begin 
+			j := ht[t]^.next; 
+			dispose(ht[t]); 
+			ht[t] := j 
+		end 
+		else begin 
+			while l^.next^.value <> A do 
+				l := l^.next; 
+			j := l^.next^.next; 
+			dispose(l^.next); 
+			l^.next := j 
+		end 
+	end;
+   
+   
 
 
 	{Показывает количество элементов в Хэш-таблице}
@@ -266,6 +252,7 @@ function htPower(var HT: hashtable): integer;
 		end;
 		htPower := count;
 	end;
+
 
 
 
