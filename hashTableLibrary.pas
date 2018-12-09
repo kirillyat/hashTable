@@ -160,6 +160,7 @@ procedure htOutput(var ht: hashTable);
 			write('[', i, ']');
 			outputLine(ht[i]);
 			writeln;
+			writeln;
 		end; 
 		writeln('#########################');
 		writeln;
