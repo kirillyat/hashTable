@@ -1,5 +1,7 @@
+unit hashTableLibrary;
 
 interface
+
 const 
 		{Размер ХЭШ-таблицы} {МОЖНО МЕНЯТЬ}
 		n = 5; 
