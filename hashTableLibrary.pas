@@ -59,16 +59,16 @@ implementation
 
 
 	{Инициализация ХЭШ-Таблицы}
-procedure htInit(var ht: hashTable);
+procedure htInit(var ht : hashTable);
 	var
-		i: integer;
+		i : integer;
 	begin
 		for i := 0 to n - 1 do
 			ht[i] := nil
 	end;
 
 	{Локальная процедура для очистки памяти (не идет в интерфейс)}
-procedure Free(L: link);
+procedure Free(L : link);
 	begin
 		if L <> nil then begin
 			if L^.next = nil then dispose(L)
@@ -81,7 +81,7 @@ procedure Free(L: link);
 	{Очистка таблицы и Освобождение памяти}
 procedure htFree(var ht: hashTable);
 	var
-		i: integer;
+		i : integer;
 	begin
 		for i := 0 to n - 1 do begin
 			Free(ht[i]);
@@ -93,8 +93,8 @@ procedure htFree(var ht: hashTable);
 	{Добавление одного элемента}	
 procedure htAdd(var ht: hashTable; A: valueType);
 	var
-	l, J: link;
-	t:integer;
+		l, J : link;
+		t : integer;
 		
 	begin
 		t := a mod n;
@@ -133,7 +133,7 @@ procedure htAdd(var ht: hashTable; A: valueType);
 	{Заполнение таблицы (несколько элементов)}
 procedure htFill(var ht: hashTable);
 	var
- 		A: valueType;
+ 		A : valueType;
 	begin
 		while not eoln do begin
 			read(A);
@@ -143,7 +143,7 @@ procedure htFill(var ht: hashTable);
 	
 	
 	{Локальная процедура для вывода (не идет в интерфейс)}
-procedure outputLine(L: link);
+procedure outputLine(L : link);
 	begin
 		if L <> nil then begin
 			write(' ', L^.value);
