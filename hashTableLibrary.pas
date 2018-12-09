@@ -182,7 +182,7 @@ function htInHashTable(var ht: hashTable; A: valueType): boolean;
 			end
 			else if l^.value > A then break
 		end;
-		inHashTable := f;
+		htInHashTable := f;
 	end;
 	
 	{Дать ссылку на A}
@@ -199,7 +199,7 @@ function htFindElement(var ht: hashTable; A: valueType): link;
 			end
 			else if l^.value > A then break
 		end;
-		findElement := result;		
+		htFindElement := result;		
 	end;
 	
 	
