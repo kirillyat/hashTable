@@ -98,7 +98,7 @@ procedure htAdd(var ht: hashTable; A: valueType);
 		
 	begin
 		t := a mod n;
-		l := ht[A mod n];
+		l := ht[t];
 		if ht[t] = nil then begin
 				new(ht[t]);
 				ht[t]^.value := A;
@@ -115,11 +115,10 @@ procedure htAdd(var ht: hashTable; A: valueType);
 					break;
 				end
 				else begin
-					if l^.value >= A then begin
+					if l^.next^.value > A then begin
 						new(J);
-						J^.value := l^.value;
+						J^.value := A;
 						J^.next := l^.next;
-						l^.value := A;
 						l^.next := J;
 						break;
 					end
@@ -128,6 +127,7 @@ procedure htAdd(var ht: hashTable; A: valueType);
 			end;	
 		end;
 	end;
+	
 	
 
 	{Заполнение таблицы (несколько элементов)}
