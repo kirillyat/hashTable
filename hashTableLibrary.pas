@@ -199,7 +199,9 @@ function htFindElement(var ht: hashTable; A: valueType): link;
 				result := l;
 				break;
 			end
-			else if l^.value > A then break
+			else if l^.value > A then 
+				break;
+			l := l^.next;
 		end;
 		htFindElement := result;		
 	end;
