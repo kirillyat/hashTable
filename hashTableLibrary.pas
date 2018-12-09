@@ -33,10 +33,10 @@ type
    procedure htDelOne(var ht: hashTable; A: valueType);
 
    {Находится ли A в таблице?}
-   function inHashTable(var ht: hashTable; A: valueType): boolean;
+   function htInHashTable(var ht: hashTable; A: valueType): boolean;
 
    {Дать ссылку на A}
-   function findElement(var ht: hashTable; A: valueType): link;
+   function htFindElement(var ht: hashTable; A: valueType): link;
 
    {Очистка таблицы и Освобождение памяти}
    procedure htFree(var ht: hashTable);
@@ -166,7 +166,7 @@ procedure htOutput(var ht: hashTable);
 	
 	
 	{Находится ли A в таблице?}	
-function inHashTable(var ht: hashTable; A: valueType): boolean;
+function htInHashTable(var ht: hashTable; A: valueType): boolean;
 	var
 		l: link;
 		f: boolean;
@@ -184,7 +184,7 @@ function inHashTable(var ht: hashTable; A: valueType): boolean;
 	end;
 	
 	{Дать ссылку на A}
-function findElement(var ht: hashTable; A: valueType): link;
+function htFindElement(var ht: hashTable; A: valueType): link;
 	var
 		 l, result: link;
 	begin
