@@ -173,7 +173,7 @@ function htInHashTable(var ht: hashTable; A: valueType): boolean;
 		L: link;
 		f: boolean;
 	begin
-		L := ht[a mod n];
+		L := ht[abs(a mod n)];
 		f := False;
 		while L <> nil do begin
 			if L^.value = A then begin
@@ -192,7 +192,7 @@ function htFindElement(var ht: hashTable; A: valueType): link;
 	var
 		 l, result: link;
 	begin
-		l := ht[a mod n];
+		l := ht[abs(a mod n)];
 		result := nil;
 		while l <> nil do begin
 			if l^.value = A then begin
