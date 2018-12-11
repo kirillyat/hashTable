@@ -15,7 +15,7 @@ type
 		
 		{элементы ХЭШ-таблицы}
 		htElem = record 
-			{МОЖНО ДОБАВИТЬ ДРУГИЕ ПОЛЯ}
+		{МОЖНО ДОБАВИТЬ ДРУГИЕ ПОЛЯ: может понадобиться менять htoutput для вывода содержимого}
 			value: valueType;
 			next: link;
 		end;
@@ -47,7 +47,7 @@ type
            {Сколько элементов в хэш таблице?}
            function htPower(var ht: hashTable): integer;
 
-           {Вывод всех элементов}
+           {Вывод всех ключей (value) таблицы}
            procedure htOutput(var ht: hashTable);
 
 
