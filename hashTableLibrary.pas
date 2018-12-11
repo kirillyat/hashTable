@@ -215,7 +215,7 @@ procedure htDelOne(var ht: hashtable; A: ValueType);
 		l, j : link;
 		t : integer;
 	begin
-		t := A mod n;
+		t := abs(A mod n);
 		l := ht[t];
 		if ht[t]^.value = A then begin 
 			j := ht[t]^.next; 
