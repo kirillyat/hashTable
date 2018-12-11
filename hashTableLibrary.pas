@@ -15,6 +15,7 @@ type
 		
 		{элементы ХЭШ-таблицы}
 		htElem = record 
+			{МОЖНО ДОБАВИТЬ ДРУГИЕ ПОЛЯ}
 			value: valueType;
 			next: link;
 		end;
