@@ -32,7 +32,7 @@ type
            {Заполнение таблицы (несколько элементов)}
            procedure htFill(var ht: hashTable);
 
-           {Удаляет элемент А}
+{Удаляет элемент А} {перед удалением нужно проверить есть ли элемент в таблице}
            procedure htDelOne(var ht: hashTable; A: valueType);
 
            {Находится ли A в таблице?}
