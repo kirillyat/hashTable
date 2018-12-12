@@ -100,7 +100,7 @@ procedure htAdd(var ht: hashTable; A: valueType);
 			ht[t]^.value := A; 
 			ht[t]^.next := nil; 
 		end 
-		else if l^.value > A then begin 
+		else if l^.value >= A then begin 
 			new(j); 
 			j^.value := A; 
 			j^.next := l; 
